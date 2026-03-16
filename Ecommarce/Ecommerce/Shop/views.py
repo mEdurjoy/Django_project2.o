@@ -1,8 +1,18 @@
 from django.shortcuts import render
-
+from django.views import View
+from . models import Product
 # Create your views here.
-def home(request):
-     return render(request, 'Shop/home.html')
+#def home(request):
+#     return render(request, 'Shop/home.html')
+
+class ProductView(View):
+ def get(self, request):
+  gentspant = Product.objects.filter(catagory='G')
+  babyfashion = Product.objects.filter(catagory='BF')
+  borka = Product.objects.filter(catagory='BK')
+  saree = Product.objects.filter(catagory='S')
+  return render(request, 'Shop/home.html', {'gentspants': gentspant,'babyfashions': babyfashion,'borkas': borka,'sarees': saree})
+
 
 def product_detail(request):
  return render(request, 'Shop/productdetail.html')
